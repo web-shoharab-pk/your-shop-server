@@ -46,15 +46,15 @@ client.connect(err => {
     }) 
     app.post('/orderDetails', (req, res) => {
         const newOrder = req.body;
-        console.log("adding new event", newOrder);
+        console.log(newOrder);
         orderCollection.insertOne(newOrder)
             .then(result => {
                 console.log('insertedCount', result.insertedCount);
                 res.send(result.insertedCount > 0)
             })
     })
-    app.get('/orderDetailsInfo', (req, res) => {
-        orderCollection.find({})
+    app.get('/orderDetailsInfo/:email', (req, res) => {
+        orderCollection.find({email:  req.params.id})
            .toArray((err, product) => {
                res.send(product)
            })
