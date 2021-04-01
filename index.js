@@ -54,7 +54,7 @@ client.connect(err => {
             })
     })
     app.get('/orderDetailsInfo/:email', (req, res) => {
-        orderCollection.find({email:  req.params.email})
+        orderCollection.find(req.params.email)
            .toArray((err, product) => {
                res.send(product)
            })
