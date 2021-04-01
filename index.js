@@ -33,12 +33,16 @@ client.connect(err => {
     app.delete('/deleteProduct/:id', (req, res) => {
         product.deleteOne({ _id: ObjectID(req.params.id) })
             .then(result => {
-
                 res.send(result.deletedCount > 0)
             })
-        console.log(req.params.id);
     })
-
+    app.get('/product/:id', (req, res) => {
+        product.find({ _id: ObjectID(req.params.id) })
+           .toArray((err, product) => {
+               res.send(product)
+           })
+         
+    })
 
     //   client.close();
 });
